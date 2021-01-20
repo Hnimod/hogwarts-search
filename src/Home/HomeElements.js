@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 
-export const Main = styled.main``;
+export const Main = styled.main`
+  overflow: hidden;
+`;
+
 export const Header = styled.header`
   width: 100%;
   height: 8rem;
@@ -24,6 +27,7 @@ export const ResultsContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-height: 100vh;
 `;
 
 export const ResultItems = styled.div`

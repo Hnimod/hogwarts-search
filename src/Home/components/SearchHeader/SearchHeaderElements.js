@@ -24,6 +24,14 @@ export const Logo = styled(Link)`
   color: white;
   display: flex;
   align-items: center;
+
+  @media screen and (max-width: ${breakpoint.tablet}) {
+    font-size: 2.5rem;
+  }
+
+  @media screen and (max-width: ${breakpoint.mobile}) {
+    margin: 0;
+  }
 `;
 
 export const SearchField = styled.div`
@@ -47,6 +55,11 @@ export const SearchInput = styled.input`
   &::placeholder {
     color: #c9c9c9;
   }
+
+  @media screen and (max-width: ${breakpoint.mobile}) {
+    padding-left: 2rem;
+    font-size: 1.6rem;
+  }
 `;
 
 export const SearchIcon = styled(BsSearch)`
@@ -56,6 +69,10 @@ export const SearchIcon = styled(BsSearch)`
   top: 50%;
   transform: translateY(-50%);
   font-size: 2.5rem;
+
+  @media screen and (max-width: ${breakpoint.mobile}) {
+    display: none;
+  }
 `;
 
 export const PowerBy = styled.div`
@@ -83,11 +100,27 @@ export const PowerBy = styled.div`
   }
 `;
 
-export const Setting = styled(Link)`
+export const Setting = styled.button`
   color: white;
-  font-size: 4rem;
+  font-size: 2.5rem;
   margin-left: 4rem;
   margin-right: 1rem;
   display: flex;
   justify-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    color: yellow;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  @media screen and (max-width: ${breakpoint.tablet}) {
+    margin-left: 0;
+  }
 `;

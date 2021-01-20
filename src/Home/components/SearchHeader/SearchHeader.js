@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { FaAlgolia, FaHeading } from 'react-icons/fa';
-import { VscSettings } from 'react-icons/vsc';
+import { FiLogOut } from 'react-icons/fi';
 import {
   SearchContainer,
   Logo,
@@ -30,8 +30,8 @@ const SearchHeader = (props) => {
         <FaAlgolia />
         <span>algolia</span>
       </PowerBy>
-      <Setting to="/">
-        <VscSettings />
+      <Setting onClick={props.onLogOut}>
+        <FiLogOut />
       </Setting>
     </SearchContainer>
   );

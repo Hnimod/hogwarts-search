@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { breakpoint } from '../../../app-config';
 
 const Container = styled.article`
   font-size: 1.6rem;
@@ -28,6 +29,16 @@ const Meta = styled.div`
   & > *:not(:first-child) {
     margin-left: 1rem;
   }
+
+  @media screen and (max-width: ${breakpoint.mobile}) {
+    font-size: 1.2rem;
+    & > *:not(:last-child) {
+      padding-right: 0.4rem;
+    }
+    & > *:not(:first-child) {
+      margin-left: 0.4rem;
+    }
+  }
 `;
 
 const Point = styled.div``;
@@ -39,6 +50,10 @@ const Url = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+
+  @media screen and (max-width: ${breakpoint.mobile}) {
+    display: none;
+  }
 `;
 const CommentText = styled.div`
   margin-top: 1rem;
@@ -57,11 +72,12 @@ const ResultItem = (props) => {
     title,
     commentText,
     timeStamp,
-    id,
     points,
     nbComments,
     url,
     author,
+    to,
+    disable,
   } = props;
 
   const createTitleMarkup = (highlight) => {
@@ -109,13 +125,19 @@ const ResultItem = (props) => {
     <Container>
       {type === 'story' && (
         <Title
-          to={{ pathname: `/article/${id}`, state: { nbComments } }}
+          to={to}
           dangerouslySetInnerHTML={createTitleMarkup(highlight)}
+          onClick={(e) => {
+            if (disable) {
+              e.preventDefault();
+              e.target.parentElement.previousElementSibling.click();
+            }
+          }}
         ></Title>
       )}
       <Meta>
         <Point>
-          {points ? points : 0} {points > 1 ? 'points' : 'point'}
+          {points ? points : 0} {points > 1 ? 'points' : 'points'}
         </Point>
         <Author>{author}</Author>
         <Time>{time}</Time>

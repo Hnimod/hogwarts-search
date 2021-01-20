@@ -1,11 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
+import { breakpoint } from '../../app-config';
 
 const Container = styled.div`
   margin: 1.6rem 0;
 
   & > *:not(:first-child) {
     margin-left: 3rem;
+  }
+
+  @media screen and (max-width: ${breakpoint.mobile}) {
+    & > *:not(:first-child) {
+      margin-left: 1.2rem;
+    }
   }
 `;
 

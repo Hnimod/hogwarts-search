@@ -1,17 +1,28 @@
 import React from 'react';
 import styled from 'styled-components';
+import { breakpoint } from '../../../app-config';
 
 const Container = styled.div`
+  width: 100%;
   display: flex;
   align-items: center;
   font-size: 1.6rem;
+
+  @media screen and (max-width: ${breakpoint.tablet}) {
+    font-size: 1.4rem;
+  }
 `;
 
 const Title = styled.span`
   margin-right: 1rem;
+
+  @media screen and (max-width: ${breakpoint.tablet}) {
+    display: none;
+  }
 `;
 
 const Select = styled.select`
+  width: 100%;
   padding: 0.5rem;
   font: inherit;
   color: grey;

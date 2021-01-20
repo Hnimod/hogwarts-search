@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 export const Main = styled.main`
   width: 100%;
   margin: 1rem 0;
+  overflow: hidden;
 `;
 
 export const HeaderContainer = styled.div`
@@ -27,6 +28,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-height: 100vh;
 `;
 
 export const Comments = styled.div`

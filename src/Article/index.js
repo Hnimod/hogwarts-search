@@ -14,20 +14,26 @@ import {
 } from './ArticleElements';
 import ResultItem from '../shared/components/ResultItem/ResultItem';
 import Comment from './components/Comment';
+import Spinner from '../shared/components/Spinner/Spinner';
 
-const Article = (props) => {
+const Article = () => {
   const [data, setData] = useState();
+  const [isLoading, setIsLoading] = useState(false);
   const { id } = useParams();
   const { state } = useLocation();
 
   useEffect(() => {
+    setIsLoading(true);
     axios
       .get(`http://hn.algolia.com/api/v1/items/${id}`)
       .then((res) => {
+        setIsLoading(false);
         setData(res.data);
-        console.log(res);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setIsLoading(false);
+        console.log(err);
+      });
   }, [id]);
 
   const nestedComments = (child) => {
@@ -66,9 +72,19 @@ const Article = (props) => {
         </Header>
       </HeaderContainer>
       <Container>
+        {isLoading && <Spinner />}
         {!!data && (
           <>
             <ArticleItem>
+              <a
+                href={data.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ textDecoration: 'none' }}
+              >
+                {' '}
+              </a>
+
               <ResultItem
                 key={data.objectID}
                 id={data.objectID}
@@ -79,13 +95,18 @@ const Article = (props) => {
                 timeStamp={data.created_at_i}
                 points={data.points}
                 nbComments={
-                  state.nbComments ? state.nbComments : data.children.length
+                  !!state.nbComments ? state.nbComments : data.children.length
                 }
                 url={data.url ? data.url : data.story_url}
                 author={data.author}
+                to="/"
+                disable={true}
               />
             </ArticleItem>
             <Comments>
+              {data.children.length === 0 && (
+                <h4 style={{ fontSize: '2rem' }}>No comments yet</h4>
+              )}
               {data.children.map((child) => nestedComments(child))}
             </Comments>
           </>
